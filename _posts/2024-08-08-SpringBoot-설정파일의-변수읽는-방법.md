@@ -47,7 +47,7 @@ public class EnvConfiguration {
 
 의도한대로 정상적으로 적용됨을 확인할 수 있다.
 
-여기서 중요요한 점은 `Environment`를 사용했다는 것이다.  
+여기서 중요한 점은 `Environment`를 사용했다는 것이다.  
 `Environment`클래스는 인터넷에 `스프링부트 환경변수` 또는 `스프링부트 custom value`등으로 검색했을때 `application.yml`에 있는 값을 쉽게 가져오는 방법을 설명하는 글을 볼 수 있다.
 
 그런데 이 글에서 제시하는 방법은 `application`이 두개라는 점에서 차이가 있다.
@@ -69,4 +69,4 @@ java -jar application.jar --spring.profiles.active=prod --server.port=8090
 
 이런 여러가지 방식을 도입하다보면 값이 많아졌을 때 값이 많이 파편화되면 `myValue`가 어디에 정의되어 있는지 파악하기 어려워질 수 있다.
 
-그래서 나는 db connection, tomcat configuration, server port 등 프로그램 로딩 시점에 필수 데이터들은 `application.yml` 또는 `startup.sh`에 정의하고, 필수 객체가 초기화 된 후에(`@PostConstruct`가 적용된) 나중에 초기화 되는 값들은 `application.properties`에 정의하는 것을 원칙으로 하고 있다.
+그래서 나는 db connection, tomcat configuration, server port 등 프로그램 로딩 시점에 필수 데이터들은 `application.yml` 또는 `start.sh`에 정의하고, 필수 객체가 초기화 된 후에(`@PostConstruct`가 적용된) 나중에 초기화 되는 값들은 `application.properties`에 정의하는 것을 원칙으로 하고 있다.
