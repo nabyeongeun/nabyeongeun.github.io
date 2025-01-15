@@ -30,7 +30,6 @@ public class User {
 
 > https://discourse.hibernate.org/t/hte-prefix-added-on-default-to-database-table-names/7189/6
 
-
 ```sql
 CREATE SEQUENCE SEQ INCREMENT BY 1 START WITH 1 MAXVALUE 9999999999999999;
 ```
