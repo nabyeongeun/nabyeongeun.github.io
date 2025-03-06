@@ -1,6 +1,6 @@
 ---
 categories: [linux]
-tags: [linux]
+tags: [linux,https,ssl]
 ---
 
 이전 까지는 스프링으로 된 레거시 프로젝트만 하다가 최근에 React와 Springboot로 새로운 프로젝트를 수행하게 되었다.  
@@ -45,11 +45,10 @@ server.ssl.key-store-type=PKCS12
 server.ssl.key-store=keystore.p12
 server.ssl.key-store-password=아까입력한 비밀번호
 server.ssl.key-alias=mycert
-server.ssl.enabled=true
 ```
-프로젝트 내의 `application.yml`파일에 yml양식으로 입력해도 동일하게 적용되지만, 그렇게 하면 로컬에서 서버를 띄울 때에도 ssh로 테스트 해야하므로 운영서버에만 적용시키기 프로젝트와 분리시키기 위해 운영서버에만 적용되는 별도 설정으로 분리시키는 것을 권장한다.
+프로젝트 내의 `application.yml`파일에 yml양식으로 입력해도 동일하게 적용되지만, 그렇게 하면 로컬에서 서버를 띄울 때에도 `https`로 테스트 해야하므로 운영과 개발환경을 분리시키기 위해 운영서버 설정으로 두는 것을 권장한다.
 
-설정을 완료한후 톰캣을 실행시켰을 때 로그에 `https`라는 단어가 보이면 SSL적용에 성공한 것이다.
+설정을 완료한후 톰캣을 실행시켰을 때 로그에 `https`라는 단어가 보이면 SSL인증서 적용에 성공한 것이다.
 
 # 3. WEB서버 호스트 설정
 
@@ -63,16 +62,15 @@ curl -v https://192.168.123.123:8080/testService
 ```
 curl -v https://www.qwerty.co.kr:8080/testService
 ```
-그런데 저 도메인과 public IP를 이어주는 DNS에는 웹서버의 public IP가 명시되어 있기 때문에 위 request는 `localhost:8080`을 대상으로 테스트 하는 것이나 다음이 없다.  
+그런데 저 도메인과 public IP를 이어주는 DNS에는 웹서버의 public IP가 명시되어 있기 때문에 위 request는 `localhost:8080`을 대상으로 테스트 하는 것이나 다름이 없다.  
 
 그래서 웹 서버의 호스트 설정이 필요하다.  
 레드햇이나 우분투 계열의 리눅스는 `/etc/hosts`를 DNS서버처럼 사용하기 떄문에 여기에 인증서의 도메인과 WAS의 private IP를 명시하면 도메인 호출로 WAS의 private IP로 request를 보낼 수 있다.
 
-`/etc/hosts`파일이 존재한다면 파일을 열어서 내용을 추가하면 되고, 파일이 존재하지 않는다면 다음과 같이 생성과 내용기입을 동시에 할 수 있다.
-
 ```
-cat "192.168.123.123 www.qwerty.co.kr" >> /etc/hosts
+echo "192.168.123.123 www.qwerty.co.kr" >> /etc/hosts
 ```
+위의 명령어에서 `>`가 하나만 들어가면 기존 `/etc/hosts`내용을 덮어쓰기 때문에 `>>`로 써야하는 것에 주의해야 한다.  
 
 그리고 다시 테스트를 했을때 성공하면 운영서버 기초공사가 완료된 것이다.
 
