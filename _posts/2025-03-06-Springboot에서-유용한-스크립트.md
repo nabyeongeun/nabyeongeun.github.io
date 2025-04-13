@@ -222,3 +222,4 @@ curl -H "Content-Type: application/json" -X POST http://localhost:28080/actuator
 curl http://localhost:28080/actuator/loggers/ROOT
 
 ```
+로그 레벨을 변경하고 나서 현재 로그상태를 위와 같이 조회할 수 있다.
