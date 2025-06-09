@@ -20,11 +20,11 @@ order: 4
 
 ## (주) 이씨오 2019. 07. 01 ~ (현재)
 ### 부천 스마트도시플랫폼 (2024.06 ~ 2025. 03)
-![3](/assets/post/portfolio/bcc1.png)
+![3](/assets/post/portfolio/smartcity.png)
 - JPA적용으로 Oracle이 아닌 타지역 DB에 적용할 수 있도록 설계
 - FCM, 부천시SSO, 부천시공공기관, 주차결제시스템, 행안부API 연계
 - Springboot 3.3, openJDK 21, Spring Data JPA, Oracle 19c, Prometheus, Grafana
-- https://play.google.com/store/apps/details?id=kr.co.eco.bucheon.aos
+> https://play.google.com/store/apps/details?id=kr.co.eco.bucheon.aos
 
 ### 한국교육학술정보원 - 독서교육종합지원시스템 데이터 이관 (2023. 11 ~ 2024. 02) 
 - 17개의 지역별로 물리적으로 구분되어 있던 데이터베이스를 2개의 권역으로 통합  
