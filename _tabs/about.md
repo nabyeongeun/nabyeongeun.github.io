@@ -20,7 +20,8 @@ order: 4
 
 ## (주) 이씨오 2019. 07. 01 ~ (현재)
 ### 부천 스마트도시플랫폼 (2024.06 ~ 2025. 03)
-![3](/assets/post/portfolio/smartcitizen.png)
+![3](/assets/post/portfolio/bcc1.png)
+![4](/assets/post/portfolio/bcc2.png)
 - JPA적용으로 Oracle이 아닌 타지역 DB에 적용할 수 있도록 설계
 - FCM, 부천시SSO, 부천시공공기관, 주차결제시스템, 행안부API 연계
 - Springboot 3.3, openJDK 21, Spring Data JPA, Oracle 19c, Prometheus, Grafana
