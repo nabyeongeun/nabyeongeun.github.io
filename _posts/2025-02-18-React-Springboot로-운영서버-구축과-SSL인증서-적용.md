@@ -19,7 +19,7 @@ Nginx의 reverse proxy는 WAS가 내부망에 위치해 있어서 직접 접근�
 SSL인증서를 발급받는 것은 이 글의 주제가 아니기 때문에 다루지 않고, 인증서를 이미 발급받았다는 전제 하에 설명한다.  
 Nginx설정 하는 것 자체도 다른 블로그에 잘 설명되어 있기 때문에 자세히 다루지는 않으며 전체적인 흐름을 설명하는 것을 주 목적으로 한다.
 
-SSL인증서를 발급받으면 대략 이런 파일을 받게 된다.
+나의 경우에는 SSL인증서 발급을 요청을 했더니 다음과 같은 파일을 받았다.
 
 ```
 ca-bundle.crt
@@ -27,14 +27,21 @@ qwerty.crt
 qwerty.key
 ```
 
-이 때 `qwerty.crt`와  `qwerty.key`를 이용하면 Nginx에 SSL인증서를 적용한다.
-
+다음의 명령어를 통해 풀체인 인증서를 생성한다.
+```
+cat  qwerty.crt ca-bundle.crt > fullchain.pem // linux  
+type qwerty.crt ca-bundle.crt > fullchain.pem // windows
+```  
+풀체인 인증서를 포함하여 웹서버에 업로드하고 Nginx에 인증서를 적용한다.
 
 # 2. Tomcat에 SSL인증서 적용하기
 
 일단 개발자PC에 openssl을 설치한 후, openssl과 위의 인증서를통해 tomcat에 적용할 파일을 생성해야 한다.  
 ```
-openssl pkcs12 -export -in qwerty.crt -inkey qwerty.key -out keystore.p12 -name mycert
+cat  qwerty.crt ca-bundle.crt > fullchain.crt // linux
+type qwerty.crt ca-bundle.crt > fullchain.crt // windows
+
+openssl pkcs12 -export -in fullchain.crt -inkey qwerty.key -out keystore.p12 -name mycert
 ```
 위의 명령어를 입력하면 비밀번호를 요구하는데 임의의 비밀번호를 입력하면 `keystore.p12` 파일이 생성된다.
 
